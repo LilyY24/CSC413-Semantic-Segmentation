@@ -1,0 +1,68 @@
+{
+    "arch": {
+        "args": {
+            "backbone": "resnet101",
+            "freeze_backbone": false,
+            "freeze_bn": false
+        },
+        "type": "DeepLab"
+    },
+    "ignore_index": 255,
+    "loss": "CrossEntropyLoss2d",
+    "lr_scheduler": {
+        "args": {},
+        "type": "Poly"
+    },
+    "n_gpu": 1,
+    "name": "DeepLab",
+    "optimizer": {
+        "args": {
+            "lr": 0.007,
+            "momentum": 0.9,
+            "weight_decay": 0.0001
+        },
+        "differential_lr": true,
+        "type": "SGD"
+    },
+    "train_loader": {
+        "args": {
+            "augment": true,
+            "base_size": 400,
+            "batch_size": 8,
+            "blur": false,
+            "crop_size": 380,
+            "data_dir": "data/VOCtrainval_11-May-2012",
+            "flip": false,
+            "num_workers": 8,
+            "rotate": false,
+            "scale": false,
+            "shuffle": true,
+            "split": "train_person"
+        },
+        "type": "VOC"
+    },
+    "trainer": {
+        "early_stop": 10,
+        "epochs": 50,
+        "log_dir": "saved/runs",
+        "log_per_iter": 20,
+        "monitor": "max Mean_IoU",
+        "save_dir": "saved/",
+        "save_period": 10,
+        "tensorboard": true,
+        "val": true,
+        "val_per_epochs": 5
+    },
+    "use_synch_bn": true,
+    "val_loader": {
+        "args": {
+            "batch_size": 8,
+            "crop_size": 480,
+            "data_dir": "data/VOCtrainval_11-May-2012",
+            "num_workers": 4,
+            "split": "val_person",
+            "val": true
+        },
+        "type": "VOC"
+    }
+}
